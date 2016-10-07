@@ -50,11 +50,16 @@ public class ChooseActivity extends Activity {
     private List<City> cityList;
     private List<County> countyList;
 
+    private boolean isFromActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        isFromActivity = getIntent().getBooleanExtra("isFromActivity",false);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if (prefs.getBoolean("citySelected",false)){
+        //citySelected只一次有效，选择了城市之后就永远为true
+        //判断条件为若城市已选择且不是从另一个activity返回（也就是第一次启动程序），则直接跳过选择城市的activity
+        if (prefs.getBoolean("citySelected",false) && !isFromActivity){
             Intent intent = new Intent(this,WeatherActivity.class);
             startActivity(intent);
             finish();
@@ -218,8 +223,12 @@ public class ChooseActivity extends Activity {
     public void onBackPressed() {
         if (level == LEVEL_COUNTY){
             loadCities();
-        }else if (level == LEVEL_CITY){
+        }else if (level == LEVEL_CITY) {
             loadProvinces();
+        }else if (isFromActivity){
+            Intent intent = new Intent(ChooseActivity.this,WeatherActivity.class);
+            startActivity(intent);
+            finish();
         }else if (level == LEVEL_PROVINCE) {
             finish();
         }

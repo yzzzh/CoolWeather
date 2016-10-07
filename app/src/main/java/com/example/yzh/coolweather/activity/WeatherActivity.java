@@ -2,12 +2,15 @@ package com.example.yzh.coolweather.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,8 @@ public class WeatherActivity extends Activity {
     private TextView tvMaxTemp;
     private TextView tvDate;
     private ProgressDialog progressDialog;
+    private Button btnChangeCity;
+    private Button btnRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,8 @@ public class WeatherActivity extends Activity {
         tvWeatherDesc = (TextView) findViewById(R.id.tvDescrition);
         tvMinTemp = (TextView) findViewById(R.id.tvMinTemp);
         tvMaxTemp = (TextView) findViewById(R.id.tvMaxTemp);
+        btnChangeCity = (Button) findViewById(R.id.btnChangeCity);
+        btnRefresh = (Button) findViewById(R.id.btnRefresh);
         //判断是否通过选择城市进入这个页面还是直接进入这个页面
         //其实和之前的queryFromServer是一样的，要么从本地加载，要么从服务器加载到本地，再从本地加载
         String countyCode = getIntent().getStringExtra("countyCode");
@@ -46,6 +53,29 @@ public class WeatherActivity extends Activity {
         }else {
             loadWeatherFromServer(countyCode,"county");
         }
+
+        btnChangeCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WeatherActivity.this,ChooseActivity.class);
+                intent.putExtra("isFromActivity",true);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showProgressDialog();
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this);
+                String weatherCode = prefs.getString("weatherCode","");
+                if (!TextUtils.isEmpty(weatherCode)){
+                    loadWeatherFromServer(weatherCode,"weather");
+                }
+                closeProgressDialog();
+            }
+        });
     }
 
     private void loadWeatherFromServer(final String code,String type) {

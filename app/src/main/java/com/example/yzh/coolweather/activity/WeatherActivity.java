@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yzh.coolweather.R;
+import com.example.yzh.coolweather.service.AutoUpdateService;
 import com.example.yzh.coolweather.util.HttpCallbackListener;
 import com.example.yzh.coolweather.util.HttpUtil;
 import com.example.yzh.coolweather.util.Utility;
@@ -45,6 +46,10 @@ public class WeatherActivity extends Activity {
         tvMaxTemp = (TextView) findViewById(R.id.tvMaxTemp);
         btnChangeCity = (Button) findViewById(R.id.btnChangeCity);
         btnRefresh = (Button) findViewById(R.id.btnRefresh);
+
+        //注册自动刷新的服务
+        Intent intent = new Intent(this,AutoUpdateService.class);
+        startService(intent);
         //判断是否通过选择城市进入这个页面还是直接进入这个页面
         //其实和之前的queryFromServer是一样的，要么从本地加载，要么从服务器加载到本地，再从本地加载
         String countyCode = getIntent().getStringExtra("countyCode");

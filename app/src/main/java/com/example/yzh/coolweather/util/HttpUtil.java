@@ -30,9 +30,9 @@ public class HttpUtil {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                     StringBuilder response = new StringBuilder();
                     String line;
-                    while ((line = reader.readLine()) != null)
+                    while ((line = reader.readLine()) != null) {
                         response.append(line);
-
+                    }
                     if (listener != null)
                         listener.onFinish(response.toString());
                 }catch (Exception e){

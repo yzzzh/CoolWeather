@@ -6,84 +6,138 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="50dp"
+            android:background="#484E61">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnChangeCity"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="切换城市"/>
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/home"/>
+
             <TextView
                 android:id="@+id/tvCity"
                 android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="24sp"
+                android:textColor="#fff"
                 android:text="城市"/>
-            <Button
+
+            <ImageButton
                 android:id="@+id/btnRefresh"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="刷新"/>
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/refresh"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tvPublishTime"
-            android:gravity="right"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="发布日期"/>
-    </LinearLayout>
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:background="@drawable/background">
 
         <TextView
-            android:id="@+id/tvDate"
-            android:gravity="center"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="日期"/>
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:text="更新时间："
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/tvPublishTime"
+            android:layout_alignEnd="@+id/tvPublishTime" />
+
         <TextView
-            android:id="@+id/tvDescrition"
-            android:gravity="center"
-            android:layout_width="match_parent"
+            android:id="@+id/tvPublishTime"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="描述"/>
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#000"
+            android:textSize="30sp"
+            android:typeface="serif"
+            android:text="发布日期"/>
+
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
             <TextView
-                android:id="@+id/tvMinTemp"
+                android:id="@+id/tvDate"
+                android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="最低温"/>
+                android:layout_height="40dp"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:typeface="serif"
+                android:text="日期"/>
+
             <TextView
+                android:id="@+id/tvDescrition"
+                android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" ~ "/>
-            <TextView
-                android:id="@+id/tvMaxTemp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#000"
+                android:textSize="40dp"
+                android:text="描述"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="最高温"/>
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tvMinTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000"
+                    android:textSize="40dp"
+                    android:typeface="serif"
+                    android:text="最低温"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#000"
+                    android:textSize="40dp"
+                    android:text=" ~ "/>
+
+                <TextView
+                    android:id="@+id/tvMaxTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000"
+                    android:textSize="40dp"
+                    android:text="最高温"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+
+
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,8 +30,8 @@ public class WeatherActivity extends Activity {
     private TextView tvMaxTemp;
     private TextView tvDate;
     private ProgressDialog progressDialog;
-    private Button btnChangeCity;
-    private Button btnRefresh;
+    private ImageButton btnChangeCity;
+    private ImageButton btnRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +45,9 @@ public class WeatherActivity extends Activity {
         tvWeatherDesc = (TextView) findViewById(R.id.tvDescrition);
         tvMinTemp = (TextView) findViewById(R.id.tvMinTemp);
         tvMaxTemp = (TextView) findViewById(R.id.tvMaxTemp);
-        btnChangeCity = (Button) findViewById(R.id.btnChangeCity);
-        btnRefresh = (Button) findViewById(R.id.btnRefresh);
+        btnChangeCity = (ImageButton) findViewById(R.id.btnChangeCity);
+        btnRefresh = (ImageButton) findViewById(R.id.btnRefresh);
 
-        //注册自动刷新的服务
-        Intent intent = new Intent(this,AutoUpdateService.class);
-        startService(intent);
         //判断是否通过选择城市进入这个页面还是直接进入这个页面
         //其实和之前的queryFromServer是一样的，要么从本地加载，要么从服务器加载到本地，再从本地加载
         String countyCode = getIntent().getStringExtra("countyCode");
@@ -73,6 +71,7 @@ public class WeatherActivity extends Activity {
             @Override
             public void onClick(View v) {
                 showProgressDialog();
+                Toast.makeText(WeatherActivity.this,"更新天气中...",Toast.LENGTH_SHORT).show();
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this);
                 String weatherCode = prefs.getString("weatherCode","");
                 if (!TextUtils.isEmpty(weatherCode)){
@@ -83,7 +82,13 @@ public class WeatherActivity extends Activity {
         });
     }
 
-    private void loadWeatherFromServer(final String code,String type) {
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadWeather();
+    }
+
+    private void loadWeatherFromServer(final String code, String type) {
         if (type.equals("county")) {
             final String address = "http://www.weather.com.cn/data/list3/city" + code + ".xml";
             HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
@@ -142,6 +147,9 @@ public class WeatherActivity extends Activity {
         tvMinTemp.setText(prefs.getString("minTemp",""));
         tvMaxTemp.setText(prefs.getString("maxTemp",""));
         tvDate.setText(prefs.getString("date",""));
+        //注册自动刷新的服务
+        Intent intent = new Intent(this,AutoUpdateService.class);
+        startService(intent);
     }
 
     //显示进度框

@@ -4,13 +4,13 @@
     android:id="@+id/activity_weather"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#484E61">
+            android:layout_height="50dp">
 
             <ImageButton
                 android:id="@+id/btnChangeCity"
@@ -21,15 +21,7 @@
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/home"/>
 
-            <TextView
-                android:id="@+id/tvCity"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textSize="24sp"
-                android:textColor="#fff"
-                android:text="城市"/>
+
 
             <ImageButton
                 android:id="@+id/btnRefresh"
@@ -47,8 +39,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/background">
+        android:layout_weight="1">
 
         <TextView
             android:layout_width="wrap_content"
@@ -79,12 +70,24 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvCity"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="60sp"
+                android:layout_margin="20dp"
+                android:textColor="#fff"
+                android:text="城市"/>
+
+
+            <TextView
                 android:id="@+id/tvDate"
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:textSize="18sp"
-                android:textColor="#000"
+                android:textColor="#FFF"
                 android:typeface="serif"
                 android:text="日期"/>
 
@@ -94,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
-                android:textColor="#000"
+                android:textColor="#FFF"
                 android:textSize="40dp"
                 android:text="描述"/>
 
@@ -109,7 +112,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#000"
+                    android:textColor="#FFF"
                     android:textSize="40dp"
                     android:typeface="serif"
                     android:text="最低温"/>
@@ -120,7 +123,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:textColor="#000"
+                    android:textColor="#FFF"
                     android:textSize="40dp"
                     android:text=" ~ "/>
 
@@ -129,7 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#000"
+                    android:textColor="#FFF"
                     android:textSize="40dp"
                     android:text="最高温"/>
             </LinearLayout>
